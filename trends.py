@@ -197,6 +197,14 @@ def analyze_tweet_sentiment(tweet):
     # You may change any of the lines below.
     average = make_sentiment(None)
     "*** YOUR CODE HERE ***"
+    if tweet_words(tweet):
+        sentiments = []
+        for word in tweet_words(tweet):
+            ws = get_word_sentiment(word)
+            if has_sentiment(ws):
+                sentiments.append(sentiment_value(ws))
+        if len(sentiments): # TODO switch to Python 3.8 and use walrus
+            average = make_sentiment(sum(sentiments) / len(sentiments))
     return average
 
 
