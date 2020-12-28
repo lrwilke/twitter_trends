@@ -117,7 +117,6 @@ def extract_words(text):
     ['cat', 'on', 'my', 'keyboard']
     """
     "*** YOUR CODE HERE ***"
-    from string import ascii_letters
     return ''.join([c if c in ascii_letters else ' ' for c in text]).split()
 
 def make_sentiment(value):
