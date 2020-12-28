@@ -307,6 +307,22 @@ def group_tweets_by_state(tweets):
     """
     tweets_by_state = {}
     "*** YOUR CODE HERE ***"
+    
+    # dictionary of all state centroids to compare against (find_state_center returns position)
+    state_centers = {key: find_state_center(value) for key,value in us_states.items()}
+
+    # for each tweet, find which state centroid it is closest to (use geo_distance from geo.py)
+    for tweet in tweets:
+        candidate = None, None # state, distance
+        for state, center in state_centers.items():
+            distance = geo_distance(tweet_location(tweet), center)
+            if candidate[0] == None or distance < candidate[1]:
+                candidate = state, distance
+        if candidate[0] in tweets_by_state:
+            tweets_by_state[candidate[0]].append(tweet)
+        else:
+            tweets_by_state[candidate[0]] = [tweet]
+
     return tweets_by_state
 
 def average_sentiments(tweets_by_state):
